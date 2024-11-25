@@ -1,0 +1,40 @@
+CREATE DATABASE IF NOT EXISTS sorveteria;
+USE sorveteria;
+show databases;
+
+-- Tabela de usuários
+CREATE TABLE IF NOT EXISTS users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    senha VARCHAR(255) NOT NULL
+);
+
+-- Tabela de produtos (sabores de sorvete)
+CREATE TABLE IF NOT EXISTS products (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    price DECIMAL(10, 2) NOT NULL,
+    image VARCHAR(255) NOT NULL
+);
+
+-- Tabela de pedidos
+CREATE TABLE IF NOT EXISTS orders (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    items TEXT NOT NULL,
+    total DECIMAL(10, 2) NOT NULL,
+    user_id INT,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+-- Inserir produtos na tabela products
+INSERT INTO products (nome, price, image) VALUES
+('Baunilha', 100.00, '/static/Bacio-di-Latte.webp'),
+('Chocolate', 150.00, '/static/Cioccolato-Belga.webp'),
+('Doce de Leite', 200.00, '/static/Doce-de-Leite.webp'),
+('Morango', 100.00, '/static/Fragola.webp'),
+('Pistache', 150.00, '/static/Mousse-di-Pistacchio.webp'),
+('Creme de Avelã', 200.00, '/static/creme-de-avela.webp'),
+('Morango', 100.00, '/static/Fragola.webp'),
+('Coco', 150.00, '/static/Cocco.webp'),
+('Manga', 200.00, '/static/Dolce-Mango.webp');

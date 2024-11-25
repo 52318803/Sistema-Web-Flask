@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        /* Fundo animado com bolinhas coloridas */
+        @keyframes moveBubbles {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #ffffff; 
+            position: relative;
+        }
+
+        /* Criar bolinhas no fundo */
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            background-color: #FFB6C1; 
+            animation: moveBubbles 3s infinite ease-in-out;
+            opacity: 0.5;
+        }
+
+        .bubble:nth-child(1) {
+            width: 60px;
+            height: 60px;
+            top: 10%;
+            left: 20%;
+            animation-duration: 4s;
+            animation-delay: 0s;
+        }
+
+        .bubble:nth-child(2) {
+            width: 70px;
+            height: 70px;
+            top: 40%;
+            left: 50%;
+            background-color: #FFEB3B; 
+            animation-duration: 5s;
+            animation-delay: 1s;
+        }
+
+        .bubble:nth-child(3) {
+            width: 50px;
+            height: 50px;
+            top: 60%;
+            left: 80%;
+            background-color: #90CAF9; 
+            animation-duration: 3s;
+            animation-delay: 2s;
+        }
+
+        .bubble:nth-child(4) {
+            width: 80px;
+            height: 80px;
+            top: 30%;
+            left: 70%;
+            background-color: #FF9800; 
+            animation-duration: 6s;
+            animation-delay: 1.5s;
+        }
+
+        .bubble:nth-child(5) {
+            width: 40px;
+            height: 40px;
+            top: 50%;
+            left: 10%;
+            background-color: #FFB6C1; 
+            animation-duration: 3s;
+            animation-delay: 2s;
+        }
+
+        .bubble:nth-child(6) {
+            width: 55px;
+            height: 55px;
+            top: 70%;
+            left: 30%;
+            background-color: #FFEB3B; 
+            animation-duration: 4s;
+            animation-delay: 3s;
+        }
+
+        .bubble:nth-child(7) {
+            width: 65px;
+            height: 65px;
+            top: 20%;
+            left: 60%;
+            background-color: #90CAF9; 
+            animation-duration: 3s;
+            animation-delay: 1s;
+        }
+
+        .bubble:nth-child(8) {
+            width: 50px;
+            height: 50px;
+            top: 40%;
+            left: 10%;
+            background-color: #FF9800; 
+            animation-duration: 4s;
+            animation-delay: 0.5s;
+        }
+
+        .bubble:nth-child(9) {
+            width: 75px;
+            height: 75px;
+            top: 80%;
+            left: 40%;
+            background-color: #FFB6C1; 
+            animation-duration: 5s;
+            animation-delay: 2.5s;
+        }
+
+        .bubble:nth-child(10) {
+            width: 60px;
+            height: 60px;
+            top: 10%;
+            left: 80%;
+            background-color: #FFEB3B; 
+            animation-duration: 4s;
+            animation-delay: 3s;
+        }
+
+        /* Estilo do formulário de login */
+        form {
+            background-color: #FFF8E1;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h2 {
+            text-align: center;
+            color: #D49A6A;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 16px;
+            margin-bottom: 5px;
+            color: #5C3D29;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #D49A6A;
+            border-radius: 4px;
+            font-size: 16px;
+            background-color: #FFF8E1;
+            color: #5C3D29;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background-color: #D49A6A;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #C47C3A;
+        }
+
+        p {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 14px;
+            color: #5C3D29;
+        }
+
+        a {
+            color: #D49A6A;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Bolinhas no fundo -->
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+
+    <!-- Formulário de login -->
+    <form method="POST" action="{{ url_for('login') }}">
+        <h2>Login</h2>
+        
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="Digite seu email" required>
+        
+        <label for="senha">Senha</label>
+        <input type="password" id="password" name="password" placeholder="Digite sua senha" required>
+        
+        <button type="submit">Entrar</button>
+        
+        <p>Não tem uma conta? <a href="{{ url_for('register') }}">Cadastre-se</a></p>
+    </form>
+
+</body>
+</html>

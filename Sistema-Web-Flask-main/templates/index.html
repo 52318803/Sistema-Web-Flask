@@ -1,0 +1,360 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SorveteRIA</title>
+    <link rel="stylesheet" type="text/css" href="\static\style.css" media="screen" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        .auth-buttons {
+            display: flex;
+            /* justify-content: end; */
+            gap: 15px;
+            /* margin-top: 10px;
+            margin-right: 10px; */
+        }
+
+        .auth-buttons button, .auth-buttons a {
+            padding: 5px 10px;
+            background-color: #ffc400;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .auth-buttons button:hover, .auth-buttons a:hover {
+            background-color: #FFCC00;
+        }
+
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: #28a745;
+            color: white;
+            border-radius: 5px;
+            display: none;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+
+    <button id="scrollTopBtn" title="Voltar ao topo">↑</button>
+
+    <!-- Cabeçalho -->
+    <header class="header">
+        <div class="logo">
+            <img src="\static\logo.png" height="250px" width="250px"/>
+        </div>
+    </header>
+
+    <div style="background-color: #ffd700;">
+        <nav class="nav-menu">
+            <ul>
+                <li><a href="{{ url_for('index') }}">Início</a></li>
+                <li><a href="#sabores">Sabores</a></li>
+                <li><a href="#rodape">Contato</a></li>
+                <li><a href="#rodape">Sobre</a></li>
+                <li>
+                    <div class="auth-buttons">
+                        {% if current_user.is_authenticated %}
+                            <form action="{{ url_for('logout') }}" method="POST">
+                                <button type="submit">Logout</button>
+                            </form>
+                        {% else %}
+                            <a href="{{ url_for('login') }}">Faça login</a>
+                            <a href="{{ url_for('register') }}">Cadastro</a>
+                        {% endif %}
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Slideshow container -->
+    <div class="slideshow-container">
+        <section>
+            <!-- Full-width images with number and caption text -->
+            <div class="mySlides fade">
+            <div class="numbertext"></div>
+            <img src="\static\blog-1920x600-2.png" style="width: 100%;">
+            </div>
+        
+            <div class="mySlides fade">
+            <div class="numbertext"></div>
+            <img src="\static\sorvete-de-banana-caseiro.jpg" style="width: 100%;">
+            </div>
+        
+            <div class="mySlides fade">
+            <div class="numbertext"></div>
+            <img src="\static\header_text_verao.png" style="width: 100%;">
+            </div>
+        
+            <!-- Next and previous buttons -->
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        </section>
+    </div>
+    <br>
+    
+    <!-- The dots/circles -->
+    <div style="text-align:center">
+        <span class="dot" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+        <span class="dot" onclick="currentSlide(3)"></span>
+    </div>
+
+
+    <div class="public" style="display: flex; align-items: center; justify-content: center; padding: 15px;">
+        <img src="https://images.tcdn.com.br/img/img_prod/1255352/1697050735_banner_com_infos.png" title="" alt="">
+    </div>
+    
+
+    <!-- Seção de Produtos -->
+    <section class="products-section">
+        <h2>MAIS VENDIDOS</h2>
+        <br>
+        <div class="products-container" id="product-list">
+            <!-- Produtos serão inseridos dinamicamente aqui -->
+        </div>
+    </section>
+
+    
+    <div class="catalog-header" style="background-color: #f8f2e5; color: #724c33; text-align: center;">
+        
+        <h2 class="catalog-name">NOSSOS SABORES</h2>
+        <br>
+        <!-- <div class="system-filter">
+            <form class="catalogo-form-filtros" data-form="filter">
+                <input name="loja" type="hidden" value="1255352">
+                <input name="palavra_busca" type="hidden" value="">
+                <label class="filtros filtro_marca">Filtrar
+                    <select name="filtrar_marca" class="select" id="filtrar_marca">
+                        <option value="">...</option>
+                        <option value="SorveteRIA">SorveteRIA</option>
+                    </select>
+                </label>
+                <label class="filtros filtro-ordem">Classificar Por
+                    <select name="order" id="select_ordem" class="select">
+                        <option value="7">Nome do Produto</option>
+                        <option value="1">Menor Preço</option>
+                        <option value="2">Maior Preço</option>
+                        <option value="3">Mais Vendido</option>
+                        <option value="4">Destaque</option>
+                        <option value="5">Lançamento</option>
+                    </select>
+                </label>
+                <input type="hidden" name="categoria" value="7">
+             </form>
+        </div>
+        <div class="pagination">
+            <div class="board catalogo-pagination">
+                <div class="left catalogo-display">
+                Resultado <strong class="color">10 Produtos </strong>em <strong class="color">1 Página</strong>
+            </div>
+            <div class="right catalogo-pages"></div>
+        </div>
+    </div> -->
+
+    <div class="products-container" id="product-list">
+        <!-- Produtos serão inseridos dinamicamente aqui -->
+    </div>
+
+    <div id="sabores">
+        <section class="product-list">
+            <div class="product" data-id="1">
+                <img src="\static\Bacio-di-Latte.webp" alt="Produto 1">
+                <h2>Baunilha</h2>
+                <p>O mais cremoso e delicado resultado da mistura do leite e creme de leite.</p>
+                <span class="price">R$ 100,00</span>
+                <button class="button" onclick="addToCart(1)">Adicionar ao Carrinho</button>
+            </div>
+
+            <div class="product" data-id="2">
+                <img src="\static\Cioccolato-Belga.webp" alt="Produto 2">
+                <h2>Chocolate</h2>
+                <p>Uma explosão de chocolate: gelato de chocolate, envolvido em uma calda cremosa de chocolate e finalizado com raspas de chocolate.</p>
+                <span class="price">R$ 150,00</span>
+                <button class="button" onclick="addToCart(2)">Adicionar ao Carrinho</button>
+            </div>
+
+            <div class="product" data-id="3">
+                <img src="\static\Doce-de-Leite.webp" alt="Produto 3">
+                <h2>Doce de Leite</h2>
+                <p>Nosso doce de leite, cremoso e equilibrado como só a Bacio sabe fazer.</p>
+                <span class="price">R$ 200,00</span>
+                <button class="button" onclick="addToCart(3)">Adicionar ao Carrinho</button>
+            </div>
+
+            
+        </section>
+
+        <section class="product-list">
+            <div class="product" data-id="4">
+                <img src="\static\Nocciolina.webp" alt="Produto 4">
+                <h2>Flocos</h2>
+                <p>Combinação do Baunilha com generosos flocos de Chocolate ao Leite.</p>
+                <span class="price">R$ 100,00</span>
+                <button id="product-btn" class="button" onclick="addToCart(4)">Adicionar ao Carrinho</button>
+            </div>
+
+            <div class="product" data-id="5">
+                <img src="\static\Mousse-di-Pistacchio.webp" alt="Produto 5">
+                <h2>Pistache</h2>
+                <p>A combinação do gelato de pistache com calda cremosa e crocante de pistache.</p>
+                <span class="price">R$ 150,00</span>
+                <button class="button" onclick="addToCart(5)">Adicionar ao Carrinho</button>
+            </div>
+
+            <div class="product" data-id="6">
+                <img src="\static\creme-de-avela.webp" alt="Produto 6">
+                <h2>Creme de Avelã</h2>
+                <p>Gelato de creme de avelã com chocolate e calda de avelã.</p>
+                <span class="price">R$ 200,00</span>
+                <button class="button" onclick="addToCart(6)">Adicionar ao Carrinho</button>
+            </div>
+
+        </section>
+
+        <section class="product-list">
+            <div class="product" data-id="7">
+                <img src="\static\Fragola.webp" alt="Produto 7">
+                <h2>Morango</h2>
+                <p>Gelato à base de água com morangos frescos trazidos do sul de Minas Gerais. Vegano, sem ingredientes de origem animal.</p>
+                <span class="price">R$ 100,00</span>
+                <button class="button" onclick="addToCart(7)">Adicionar ao Carrinho</button>
+            </div>
+
+            <div class="product" data-id="8">
+                <img src="\static\Cocco.webp" alt="Produto 8">
+                <h2>Coco</h2>
+                <p>A deliciosa e cremosa união entre pedaços de coco - in natura - leite e creme de leite.</p>
+                <span class="price">R$ 150,00</span>
+                <button class="button" onclick="addToCart(8)">Adicionar ao Carrinho</button>
+            </div>
+
+            <div class="product" data-id="9">
+                <img src="\static\Dolce-Mango.webp" alt="Produto 9">
+                <h2>Manga</h2>
+                <p>Gelato de manga orgânica, a base de água, de Juíz de Fora, Minas Gerais.</p>
+                <span class="price">R$ 200,00</span>
+                <button class="button" onclick="addToCart(9)">Adicionar ao Carrinho</button>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Carrinho de Compras -->
+    <section class="cart-section">
+        <h2>Seu Carrinho</h2>
+            <div id="cart-items">
+                <p>O carrinho está vazio.</p>
+            </div>
+            <p>Total: R$ <span id="total">0,00</span></p>
+        <button id="finalize-button" class="button finalize">Finalizar Compra</button>
+        </div>
+        
+        <!-- <button id="checkout" disabled>Finalizar Compra</button> -->
+    </section>
+
+    <!-- Rodapé -->
+     <div id="rodape">
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-section about">
+                    <h2>SorveteRIA</h2>
+                    <p>Deliciosos sorvetes artesanais com sabores exclusivos, feitos com ingredientes frescos e selecionados para você.</p>
+                </div>
+                
+                <div class="footer-section links">
+                    <h2>Links Rápidos</h2>
+                    <ul>
+                        <li><a href="{{ url_for('index') }}">Início</a></li>
+                        <li><a href="#sabores">Sabores</a></li>
+                        <li><a href="{{ url_for('index') }}">Cadastro</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section contact">
+                    <h2>Contato</h2>
+                    <p><i class="fas fa-phone"></i> (19) 1234-5678</p>
+                    <p><i class="fas fa-envelope"></i> contato@sorveteria.com</p>
+                    <div class="socials">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <div class="direitos">
+            <p>&copy; 2024 Gelato Sorveteria - Todos os direitos reservados.</p>
+        </div>
+    </div>
+    
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                {% if category == 'success' %}
+                    <div class="popup">{{ message }}</div>
+                    <script>
+                        // Exibir o popup por alguns segundos
+                        setTimeout(function() {
+                            document.querySelector('.popup').style.display = 'none';
+                        }, 3000);
+                    </script>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+       
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul>
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}        
+
+
+    <script>
+
+        
+        document.addEventListener('DOMContentLoaded', function () {
+            // Garantir que o DOM está completamente carregado
+
+            // Delegação de eventos para o botão de finalizar compra
+            document.body.addEventListener('click', function(event) {
+                // Verifica se o alvo do clique é o botão de finalizar compra
+                if (event.target && event.target.id === 'finalize-button') {
+                    finalizarCompra();  // Chama a função de finalização da compra
+                }
+            });
+
+            // Adicionando evento de clique para outro elemento (exemplo do meuElemento)
+            const myElement = document.getElementById('meuElemento');
+            if (myElement) {
+                myElement.addEventListener('click', function () {
+                    console.log('Elemento clicado!');
+                });
+            }
+        });
+    </script>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
